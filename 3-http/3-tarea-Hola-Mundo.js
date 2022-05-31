@@ -10,14 +10,24 @@ const servidor = http.createServer((request, response)=>{
     const respuesta = request.method
     console.log('METODO:', respuesta);
 
-    if(URL === '/hola'){
+
+    if( respuesta === 'GET' && URL === '/hola'){
+        response.setHeader('Content-Type', 'aplication/json');
         response.write((JSON.stringify(holaMundo)))
-    };
+   
+    }else if (respuesta === 'POST' && URL === '/koders')
+    {   response.statusCode = 201;
+        response.end('Aqui estan los koders'); 
+    }else{
+        response.statusCode = 404;
+        response.end('Ruta no encontrada');
+        response.end()
+    }
 
-    const headers = request.headers;
+    
 
-    response.end();
-
+    
+    
 });
 // se mnada a llamar el servidor en el puerto 6000
 servidor.listen(7000, () => {
