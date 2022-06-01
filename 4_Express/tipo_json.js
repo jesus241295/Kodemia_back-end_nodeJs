@@ -2,7 +2,7 @@ const express = require ( 'express' );
 
 const app = express();
  
-const puerto = 3000
+const port = 3500
 
 app.get("/koder", (req, res) =>{
     const tipoJson ={
@@ -23,6 +23,6 @@ app.put("/koder", (req, res) =>{
     res.json(tipoJson)
 })
 
-app.listen(puerto, () =>{
-    console.log('corriendo servidor en el puerto', puerto)
+app.listen(port, () =>{
+    console.log('corriendo servidor en el puerto', port)
 })
