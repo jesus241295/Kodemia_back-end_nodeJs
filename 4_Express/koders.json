@@ -1,0 +1,36 @@
+{
+    "koders": [
+        {
+            "nombre": "Aron",
+            "genero": "masculino"
+        },
+        {
+            "nombre": "Danny",
+            "genero": "masculino"
+        },
+        {
+            "nombre": "Nestor",
+            "genero": "masculino"
+        },
+        {
+            "nombre": "Pepito",
+            "genero": "masculino"
+        },
+        {
+            "nombre": "jesus",
+            "genero": "masculino"
+        },
+        {
+            "nombre": "Oscar",
+            "genero": "masculino"
+        },
+        {
+            "nombre": "Oscar",
+            "genero": "masculino"
+        },
+        {
+            "nombre": "Pablo",
+            "genero": "masculino"
+        }
+    ]
+}
