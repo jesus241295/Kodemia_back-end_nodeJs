@@ -1,6 +1,5 @@
-{
-  "koders": [
-    {
+[
+  {
       "nombre":"Aron",
       "edad": 15,
       "genero":"masculino"
@@ -29,6 +28,5 @@
       "nombre":"Pedro",
       "edad": 10,
       "genero":"masculino"
-    }
-  ]
-}
+  }
+]

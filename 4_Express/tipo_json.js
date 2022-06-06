@@ -1,121 +1,54 @@
-const express = require ( 'express' );
-const fs = require("fs/promises");
+const express = require("express");
+const routerKoders = require("./routers/koders");
+const routerMentores = require("./routers/mentores");
+const PORT = 8080;
+const FILENAME = 'koders.json';
+const ENCODING = 'utf8';
+const URL = "/koders";
 
-const app = express();
-// middleware convierte request a json 
-app.use(express.json())
- 
-const port = 3500;
+const server = express();
 
-app.get("/koders", async (req, res) => {
-    const archivo = await fs.readFile("koders.json", "utf8"); //el archivo es un string
-    const kodersObjet = JSON.parse(archivo);
-    const koders = kodersObjet.koders;
+// middleware para convertir request a JSON
+server.use(express.json());
 
 
-    res.json(koders);
+
+// rutas Web
+server.use('/koders', routerKoders);
+
+server.use('/mentores', routerMentores);
+
+server.get("/", (request, response) => {
+  response.send("Hola Koders!");
 });
 
-app.get("/koder", (req, res) =>{
-    const tipoJson ={
-        mensaje: 'Aqui estan todos los koders'
-    } ;
-    res.json(tipoJson);
+
+
+server.get("/koder", (req, res) => {
+  const respuesta = {
+    mensaje: "Aqui estan todos los koders",
+  };
+
+  res.json(respuesta);
 });
 
+server.post("/koder", (req, res) => {
+  const respuesta = {
+    mensaje: "Aqui puedes crear koders",
+  };
 
-// aqui se crea el verbo post en express-------------------------------------------------------------
-
-app.post("/koders", async (req, res) => {
-    const koder = req.body;
-    const archivo = await fs.readFile("koders.json", "utf8"); //el archivo es un string
-    const kodersObjet = JSON.parse(archivo);
-    const koders = kodersObjet.koders;
-
-//   agregamos un nuevo koder
-    koders.push(koder);
-// guardamos cambios de los nuevos koders
-const nuevoArchivo = JSON.stringify(kodersObjet, null, 4);
-// escribimos en archivo asincrono, lleva el await
-await fs.writeFile("koders.json", nuevoArchivo, "utf8");
-
-// Aqui se envia la respuesta
-res.status(201); //estado creado 
-
-res.json(koders);
-    
+  res.json(respuesta);
 });
 
-// app.patch("/koders/:nombre", async (req, res) => {
-// const nombre = req.params.nombre
+server.put("/koder", (req, res) => {
+  const respuesta = {
+    mensaje: "Aqui puedes sustituir un koder",
+  };
 
-//     const koder = req.body;
-//     // console.log(koder)
-//     const archivo = await fs.readFile("koders.json", "utf8"); //el archivo es un string
-//     const kodersObjet = JSON.parse(archivo);
-//     const koders = kodersObjet.koders;
-    
-//    const newKoders =  koders.map((item) => {
-//         if(item.nombre === nombre){
-//          return koder
-//         }
-//         return item
-//     });
-
-    // app.delete("/koders/:nombre", async (req, res) => {
-    //     const nombre = req.params.nombre
-        
-    //         // const koder = req.body;
-    //         // console.log(koder)
-    //         const archivo = await fs.readFile("koders.json", "utf8"); //el archivo es un string
-    //         const kodersObjet = JSON.parse(archivo);
-    //         const koders = kodersObjet.koders;
-
-    //         const newKoders =  koders.filter((koder) => koder.nombre !== nombre);
-    // const newObject = {
-    //     koders: newKoders
-    // }
-    app.get("/koders/:nombre", async (req, res) => {
-        const nombre = req.params.nombre
-        
-            // const koder = req.body;
-            // console.log(koder)
-            const archivo = await fs.readFile("koders.json", "utf8"); //el archivo es un string
-            const kodersObjet = JSON.parse(archivo);
-            const koders = kodersObjet.koders;
-
-            const newKoders =  koders.filter((koder) => koder.nombre === nombre);
-    const newObject = {
-        koders: newKoders
-    }
-//   agregamos un nuevo koder
-    // koders.push(koder);
-// guardamos cambios de los nuevos koders
-const nuevoArchivo = JSON.stringify(newObject, null, 2);
-// escribimos en archivo asincrono, lleva el await
-await fs.writeFile("koders.json", nuevoArchivo, "utf8");
-
-// Aqui se envia la respuesta
-res.status(200); //estado creado 
-
-res.json(newKoders[0]);
-    
-})
-
-
-app.post("/koder", (req, res) =>{
-    const tipoJson ={
-        mensaje: 'Aqui puedes crear koders'
-    } ;
-    res.json(tipoJson)
-});
-app.put("/koder", (req, res) =>{
-    const tipoJson ={
-        mensaje: 'Aqui puedes sustituir un koder'
-    } ;
-    res.json(tipoJson)
+  res.json(respuesta);
 });
 
-app.listen(port, () =>{
-    console.log('corriendo servidor en el puerto', port)
+server.listen(PORT, () => {
+  console.log("Servidor ejecutandose");
 });
+
