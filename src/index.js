@@ -17,7 +17,7 @@ const URL = `mongodb+srv://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}?retryWrit
 const app = express();
 app.use(express.json);
 
-app.get("/about", async (req, res) => {
+app.get("/acerca", async (req, res) => {
   try {
     console.log("paso 1");
     const koders = await Koder.find({});
